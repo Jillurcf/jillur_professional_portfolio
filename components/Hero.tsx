@@ -462,7 +462,7 @@ font-bold
 text-green-400
 ">
 
-                2+
+                5+
 
               </h3>
 
@@ -612,7 +612,7 @@ border-green-500/30
 
           <TechOrbit />
           <Image
-            src="/profilepic.jpg"
+            src="/profilepic1.png"
             width={380}
             height={380}
             alt="Jillur Rahman"
