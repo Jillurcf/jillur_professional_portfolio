@@ -4,8 +4,7 @@
 export default function BlogPage() {
 
     return (
-
-        <main
+        <section
             className="
             min-h-screen
             bg-black
@@ -18,16 +17,15 @@ export default function BlogPage() {
 
             <h1
                 className="
-                text-4xl
+                text-5xl
                 font-bold
+                text-green-400
                 "
             >
                 Blog
             </h1>
 
-
-        </main>
-
+        </section>
     );
 
 }
