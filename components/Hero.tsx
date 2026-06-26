@@ -411,7 +411,7 @@ transition
 
             <a
 
-              href="/resume.pdf"
+              href="/react_native_developer.pdf"
 
               download
 
