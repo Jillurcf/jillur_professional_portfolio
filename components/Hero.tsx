@@ -613,14 +613,14 @@ border-green-500/30
           <TechOrbit />
           <Image
             src="/profilepic1.png"
-            width={380}
-            height={380}
+            width={480}
+            height={480}
             alt="Jillur Rahman"
             className="
     relative
     z-50
-    w-[380px]
-    h-[380px]
+    w-[400px]
+    h-[400px]
     rounded-full
     border-4
     border-green-400
