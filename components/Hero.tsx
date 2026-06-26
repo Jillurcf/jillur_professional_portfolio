@@ -245,9 +245,9 @@ justify-center
         className="
 relative
 z-10
-max-w-7xl
+max-w-6xl
 mx-auto
-px-6
+px-0
 grid
 md:grid-cols-2
 gap-10
@@ -611,20 +611,23 @@ border-green-500/30
 
 
           <TechOrbit />
-          {/* <Image
-            src="/Rahman6.jpg"
+          <Image
+            src="/profilepic.jpg"
             width={380}
             height={380}
             alt="Jillur Rahman"
             className="
     relative
     z-50
+    w-[380px]
+    h-[380px]
     rounded-full
     border-4
     border-green-400
     shadow-2xl
+    object-cover
   "
-          /> */}
+          />
 
 
 
