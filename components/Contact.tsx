@@ -19,7 +19,11 @@ Let's Work Together
 
 <p className="mt-5 text-gray-300">
 
-Email: your-email@gmail.com
+Email: jrtushar@gmail.com
+
+</p>
+<p className="mt-5 text-gray-300">
+Phone: +880-1643989705
 
 </p>
 
