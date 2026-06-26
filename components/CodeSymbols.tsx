@@ -30,7 +30,7 @@ export function CodeSymbols() {
             (Math.random() - 0.5) * 8
         ]
     );
-
+// useFrame from react-three
 
     useFrame(({ clock }) => {
 
