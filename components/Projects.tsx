@@ -70,7 +70,14 @@ const projects = [
     {
         title: "PawsAndBuy",
 
-        image: "/projects/paws.png",
+        images: [
+            "/project/paws_and_buy1.png",
+            "/project/paws_and_buy2.png",
+            "/project/paws_and_buy3.png",
+            "/project/paws_and_buy4.png",
+            "/project/paws_and_buy5.png",
+            // "/project/Deligo_live.png",
+        ],
 
         video: "/videos/paws.mp4",
 
