@@ -68,7 +68,7 @@ export default function EnergyLines() {
 
         transparent
 
-        opacity={0.15}
+        opacity={0.25}
 
       />
 

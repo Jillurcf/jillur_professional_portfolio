@@ -189,55 +189,55 @@ const groq = new Groq({
 
 
 
-export async function POST(req: Request) {
+export async function POST(req:Request){
 
 
-    const { message } = await req.json();
+const {message}=await req.json();
 
 
 
-    // const completion =
-    // await groq.chat.completions.create({
+// const completion =
+// await groq.chat.completions.create({
 
-    //     messages:[
+//     messages:[
 
-    //         {
-    //             role:"system",
-    //             content:
-    //             `
-    //             You are Jillur's portfolio assistant.
-    //             Answer questions about Jillur's skills,
-    //             projects and experience.
-    //             `
-    //         },
-
-
-    //         {
-    //             role:"user",
-    //             content:message
-    //         }
-
-    //     ],
+//         {
+//             role:"system",
+//             content:
+//             `
+//             You are Jillur's portfolio assistant.
+//             Answer questions about Jillur's skills,
+//             projects and experience.
+//             `
+//         },
 
 
-    //     model:
-    //     "llama-3.1-8b-instant"
+//         {
+//             role:"user",
+//             content:message
+//         }
+
+//     ],
 
 
-    // });
-
-    const completion =
-        await groq.chat.completions.create({
-
-            model: "llama-3.1-8b-instant",
-
-            messages: [
+//     model:
+//     "llama-3.1-8b-instant"
 
 
-                {
-                    role: "system",
+// });
 
-                    content: `
+const completion =
+await groq.chat.completions.create({
+
+    model:"llama-3.1-8b-instant",
+
+    messages:[
+
+
+        {
+            role:"system",
+
+            content:`
 
 You are Jillur AI Assistant.
 
@@ -298,37 +298,114 @@ Blockchain:
 
 Projects:
 
+1. Deligo Rider (Live Application)
 
-1. Restaurant Management System
+Description:
+A real-world rider application focused on location tracking, delivery management, and optimized navigation experience.
 
 Technologies:
-React.js, Node.js, MongoDB
+React Native, TypeScript, Firebase, Google Maps
 
 Features:
-- Order management
-- Transaction management
-- Dashboard
-- User management
+- Real-time location tracking
+- Distance calculation using Haversine formula
+- Location-based mapping logic
+- Performance optimization for smoother user experience
+- Scalable mobile architecture
 
 
+2. Terminal APK
 
-2. Quiz Management System
+Description:
+A Tap-to-Pay contactless payment application that allows users to receive payments without requiring external card readers.
 
-Features:
-- Authentication
-- Role-based access
-- Quiz creation
-- Score tracking
-
-
-
-3. Blockchain Game
+Technologies:
+React Native CLI, JavaScript, Stripe
 
 Features:
-- NFT integration
-- Wallet connection
-- MetaMask integration
-- Staking mechanism
+- User authentication
+- Contactless payment workflow
+- Stripe payment integration
+- Secure transaction handling
+- Mobile-first payment experience
+
+
+3. The Sanctum APK
+
+Description:
+A women's health and menstrual management application where users can provide health information and receive personalized guidance.
+
+Technologies:
+React Native CLI, JavaScript, Stripe
+
+Features:
+- User authentication
+- Health information management
+- Stripe payment integration
+- Personalized health guidance system
+- Secure user data handling
+
+
+4. PawsAndBuy APK
+
+Description:
+A marketplace application connecting pet product sellers and buyers.
+
+Technologies:
+React Native CLI, JavaScript, Stripe
+
+Features:
+- Seller account creation
+- Product selling management
+- Shop creation functionality
+- Authentication system
+- Payment integration
+
+
+5. Audio Tour APK
+
+Description:
+A location-based audio tour application that automatically notifies users when audio content is available near their location.
+
+Technologies:
+React Native CLI, GPS, Push Notification
+
+Features:
+- GPS-based location detection
+- Audio content discovery
+- Push notifications
+- Location-aware user experience
+- Authentication system
+
+
+Technical Expertise:
+
+Mobile Development:
+- React Native CLI
+- Expo
+- Android/iOS application development
+- Native Android modules using Java
+
+Frontend:
+- React.js
+- Next.js
+- TypeScript
+- Redux
+- Tailwind CSS
+- Framer Motion
+
+Backend:
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+- REST APIs
+
+Payment & Services:
+- Stripe integration
+- Firebase
+- Google Maps API
+- JWT authentication
 
 
 
@@ -348,11 +425,11 @@ He focuses on:
 Contact:
 
 GitHub:
-YOUR_GITHUB_LINK
+https://github.com/Jillurcf
 
 
 LinkedIn:
-YOUR_LINKEDIN
+https://www.linkedin.com/in/jillur-rahman-tushar
 
 
 
@@ -365,28 +442,28 @@ Rules:
 "I don't have that information about Jillur yet."
 
 `
-                },
+        },
 
 
 
-                {
-                    role: "user",
+        {
+            role:"user",
 
-                    content: message
-                }
-
-
-            ]
-
-        });
+            content:message
+        }
 
 
-    return Response.json({
+    ]
 
-        answer:
-            completion.choices[0].message.content
+});
 
-    });
+
+return Response.json({
+
+answer:
+completion.choices[0].message.content
+
+});
 
 
 }
