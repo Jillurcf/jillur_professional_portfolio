@@ -255,12 +255,7 @@ items-center
 "
 
       >
-
-
-
-
-
-        {/* LEFT SIDE */}
+        {/* LEFT SIDE Element */}
 
 
         <motion.div
