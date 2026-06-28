@@ -67,8 +67,8 @@ export default function ProjectGallery({
 
                             h-[260px]
                             sm:h-[320px]
-                            md:h-[350px]
-                            lg:h-[400px]
+                            md:h-[200px]
+                            lg:h-[200px]
 
                             rounded-xl
 
