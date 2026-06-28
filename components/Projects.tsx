@@ -33,7 +33,7 @@ const projects = [
             "Scalable mobile architecture"
         ],
 
-        live: "https://your-live-link.com",
+        live: "https://play.google.com/store/apps/details?id=com.deligorider",
 
         github: "https://github.com/yourusername/deligo"
     },
@@ -43,7 +43,12 @@ const projects = [
     {
         title: "Terminal APK",
 
-        image: "/projects/terminal.png",
+        images: [
+            "/project/ConfirmPayment.png",
+            "/project/ConfirmPayment1.png",
+            "/project/ConfirmPayment2.png",
+
+        ],
 
         video: "/videos/terminal.mp4",
 

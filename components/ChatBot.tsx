@@ -1,220 +1,286 @@
 "use client";
 
 import {
-    useRef,
-    useState,
-    useEffect
+  useRef,
+  useState,
+  useEffect
 } from "react";
 
 import {
-    FaRobot,
-    FaPaperPlane
+  FaRobot,
+  FaPaperPlane,
+  FaTimes
 } from "react-icons/fa";
+
+import { motion } from "framer-motion";
 
 
 
 export default function ChatBot() {
 
 
-    const [message, setMessage] = useState("");
+  const [message, setMessage] = useState("");
 
-    const [answer, setAnswer] = useState(
-        "Hi 👋 I am Jillur AI Assistant. Ask me about my skills, projects, experience, or technologies."
-    );
+  const [answer, setAnswer] = useState(
+    "Hi 👋 I am Jillur AI Assistant. Ask me about my skills, projects, experience, or technologies."
+  );
 
-    const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
 
-    const chatRef = useRef<HTMLDivElement>(null);
+  const [isOpen, setIsOpen] = useState(true);
 
 
 
-    useEffect(()=>{
+  const chatRef = useRef<HTMLDivElement>(null);
 
-        chatRef.current?.scrollTo({
 
-            top:
-            chatRef.current.scrollHeight,
 
-            behavior:"smooth"
+  useEffect(() => {
 
-        });
+    chatRef.current?.scrollTo({
 
-    },[answer]);
+      top: chatRef.current.scrollHeight,
 
+      behavior: "smooth"
 
+    });
 
+  }, [answer]);
 
 
-    async function sendMessage(){
 
 
-        if(!message.trim() || loading)
-            return;
 
 
 
-        const userMessage = message;
+  async function sendMessage() {
 
 
-        setMessage("");
+    if (!message.trim() || loading)
+      return;
 
 
 
-        try {
+    const userMessage = message;
 
 
-            setLoading(true);
+    setMessage("");
 
 
 
-            const controller =
-                new AbortController();
+    try {
 
 
+      setLoading(true);
 
-            const timeout =
-                setTimeout(()=>{
 
-                    controller.abort();
 
-                },30000);
+      const controller =
+        new AbortController();
 
 
 
+      const timeout =
+        setTimeout(() => {
 
-            const res =
-            await fetch(
-                "/api/chatbot",
-                {
+          controller.abort();
 
-                    method:"POST",
+        }, 30000);
 
-                    headers:{
 
-                        "Content-Type":
-                        "application/json"
 
-                    },
 
+      const res =
+        await fetch(
+          "/api/chatbot",
+          {
 
-                    body:
-                    JSON.stringify({
+            method: "POST",
 
-                        message:userMessage
+            headers: {
 
-                    }),
+              "Content-Type": "application/json"
 
+            },
 
-                    signal:
-                    controller.signal
 
-                }
-            );
+            body: JSON.stringify({
 
+              message:userMessage
 
+            }),
 
-            clearTimeout(timeout);
 
+            signal: controller.signal
 
+          }
+        );
 
 
-            const data =
-            await res.json();
 
+      clearTimeout(timeout);
 
 
 
-            if(!res.ok){
+      const data =
+        await res.json();
 
-                throw new Error(
-                    data.error ||
-                    "AI service unavailable"
-                );
 
-            }
 
 
+      if(!res.ok){
 
+        throw new Error(
+          data.error ||
+          "AI service unavailable"
+        );
 
+      }
 
-            setAnswer(
-                data.answer
-            );
 
 
+      setAnswer(
+        data.answer
+      );
 
-
-        }
-        catch(error:any){
-
-
-            console.error(
-                "Chatbot Error:",
-                error
-            );
-
-
-
-            if(error.name==="AbortError"){
-
-                setAnswer(
-                    "The AI response took too long. Please try again."
-                );
-
-            }
-            else if(
-                error.message?.includes("429") ||
-                error.message?.includes("quota")
-            ){
-
-                setAnswer(
-                    "I am receiving many requests right now. Please wait a moment and try again."
-                );
-
-            }
-            else{
-
-
-                setAnswer(
-
-                    "Sorry, I couldn't answer right now. Please try again."
-
-                );
-
-            }
-
-
-
-        }
-        finally{
-
-            setLoading(false);
-
-        }
 
 
     }
 
 
+    catch(error:any){
+
+
+      console.error(
+        "Chatbot Error:",
+        error
+      );
+
+
+
+      if(error.name==="AbortError"){
+
+
+        setAnswer(
+          "The AI response took too long. Please try again."
+        );
+
+
+      }
+
+      else{
+
+
+        setAnswer(
+          "Sorry, I couldn't answer right now. Please try again."
+        );
+
+      }
+
+
+    }
+
+
+    finally{
+
+      setLoading(false);
+
+    }
+
+
+  }
 
 
 
 
-    function handleKeyDown(
-        e:React.KeyboardEvent<HTMLInputElement>
+
+
+
+  function handleKeyDown(
+    e:React.KeyboardEvent<HTMLInputElement>
+  ){
+
+
+    if(
+      e.key==="Enter" &&
+      !loading
     ){
 
-        if(
-            e.key==="Enter" &&
-            !loading
-        ){
-
-            sendMessage();
-
-        }
+      sendMessage();
 
     }
+
+
+  }
+
+
+
+
+
+
+
+  // Closed chatbot button
+
+  if(!isOpen){
+
+
+    return (
+
+      <motion.button
+
+        initial={{
+          scale:0
+        }}
+
+        animate={{
+          scale:1
+        }}
+
+        onClick={()=>
+          setIsOpen(true)
+        }
+
+
+        className="
+        fixed
+        bottom-6
+        right-5
+        z-50
+
+        w-14
+        h-14
+
+        rounded-full
+
+        bg-green-500
+
+        text-black
+
+        flex
+        items-center
+        justify-center
+
+        shadow-xl
+
+        hover:scale-110
+
+        transition
+        "
+
+      >
+
+        <FaRobot size={24}/>
+
+
+      </motion.button>
+
+    );
+
+
+  }
+
+
 
 
 
@@ -222,59 +288,180 @@ export default function ChatBot() {
 
 return (
 
-<div
+<motion.div
+
+
+drag="y"
+
+
+dragConstraints={{
+
+  top:0,
+
+  bottom:200
+
+}}
+
+
+
+onDragEnd={(event,info)=>{
+
+
+  // Mobile swipe down close
+
+  if(info.offset.y > 100){
+
+    setIsOpen(false);
+
+  }
+
+
+}}
+
+
+
+initial={{
+
+  opacity:0,
+
+  y:50
+
+}}
+
+
+
+animate={{
+
+  opacity:1,
+
+  y:0
+
+}}
+
+
+
 className="
+
 fixed
-bottom-6
-right-6
+
+bottom-20
+sm:bottom-6
+
+right-3
+sm:right-6
+
+left-3
+sm:left-auto
+
 z-50
-w-[calc(100%-32px)]
+
 sm:w-[380px]
+
+max-w-[420px]
+
 rounded-2xl
+
 border
+
 border-green-400/30
+
 bg-black/85
+
 backdrop-blur-xl
+
 shadow-2xl
-p-5
+
+p-3
+sm:p-5
+
 text-white
+
+touch-pan-y
+
 "
+
 >
+
+
+
 
 
 {/* HEADER */}
 
+
 <div
+
 className="
+
 flex
+
 items-center
-gap-3
+
+justify-between
+
 "
+
 >
 
 
 <div
+
 className="
-bg-green-500
-text-black
-p-3
-rounded-full
+
+flex
+
+items-center
+
+gap-3
+
 "
+
 >
 
-<FaRobot size={22}/>
+
+<div
+
+className="
+
+bg-green-500
+
+text-black
+
+p-2.5
+
+rounded-full
+
+"
+
+>
+
+
+<FaRobot size={20}/>
+
 
 </div>
 
 
 
+
+
 <div>
 
+
 <h3
+
 className="
+
 text-green-400
+
 font-bold
+
+text-sm
+
+sm:text-base
+
 "
+
 >
 
 Jillur AI Assistant
@@ -282,11 +469,18 @@ Jillur AI Assistant
 </h3>
 
 
+
+
 <p
+
 className="
+
 text-xs
+
 text-gray-400
+
 "
+
 >
 
 Powered by Gemini AI
@@ -294,10 +488,49 @@ Powered by Gemini AI
 </p>
 
 
+
 </div>
 
 
+
 </div>
+
+
+
+
+
+{/* MOBILE CLOSE BUTTON */}
+
+
+<button
+
+onClick={()=>setIsOpen(false)}
+
+className="
+
+md:hidden
+
+text-gray-400
+
+hover:text-red-400
+
+transition
+
+"
+
+>
+
+<FaTimes size={18}/>
+
+
+</button>
+
+
+
+
+</div>
+
+
 
 
 
@@ -305,42 +538,76 @@ Powered by Gemini AI
 
 {/* RESPONSE */}
 
+
+
 <div
+
 
 ref={chatRef}
 
+
 className="
-mt-5
-min-h-[100px]
-max-h-[220px]
+
+mt-4
+
+min-h-[60px]
+
+sm:min-h-[80px]
+
+max-h-[120px]
+
+sm:max-h-[220px]
+
 overflow-y-auto
+
 text-sm
+
 leading-6
+
 text-gray-300
+
+break-words
+
 "
 
 >
 
 
-{loading ? (
+{
+
+loading ?
+
+
+(
 
 <div
+
 className="
+
 flex
-gap-1
+
 items-center
+
+gap-1
+
 "
+
 >
 
-<span>Thinking</span>
+<span>
+Thinking
+</span>
+
 
 <span className="animate-bounce">
 .
 </span>
 
+
 <span className="animate-bounce">
 .
 </span>
+
 
 <span className="animate-bounce">
 .
@@ -349,17 +616,21 @@ items-center
 
 </div>
 
-
 )
+
 
 :
 
 answer
 
+
 }
 
 
+
 </div>
+
+
 
 
 
@@ -369,83 +640,153 @@ answer
 {/* INPUT */}
 
 
+
 <div
+
 className="
+
 flex
+
 gap-2
-mt-5
+
+mt-4
+
 "
+
 >
 
 
 <input
 
+
 className="
+
 flex-1
+
+min-w-0
+
 bg-gray-900
+
 border
+
 border-gray-700
-p-3
+
+px-3
+
+py-2.5
+
 rounded-xl
+
 outline-none
+
+text-sm
+
 focus:border-green-400
+
 "
+
+
 placeholder="Ask me anything..."
+
+
 
 value={message}
 
+
+
 disabled={loading}
 
+
+
 onChange={
-e=>setMessage(
+
+e=>
+
+setMessage(
 e.target.value
 )
+
 }
+
 
 
 onKeyDown={
 handleKeyDown
 }
 
+
+
 />
+
+
 
 
 
 
 <button
 
+
 onClick={sendMessage}
 
+
+
 disabled={
+
 loading ||
+
 !message.trim()
+
 }
 
+
+
 className="
+
+flex
+
+items-center
+
+justify-center
+
 bg-green-500
+
 text-black
-px-4
+
+w-11
+
+h-11
+
 rounded-xl
+
 hover:scale-105
+
 transition
+
 disabled:opacity-40
+
 "
+
 
 >
 
 
-<FaPaperPlane/>
+<FaPaperPlane size={16}/>
+
 
 
 </button>
 
 
 
-</div>
-
-
 
 </div>
+
+
+
+
+
+</motion.div>
+
 
 );
 

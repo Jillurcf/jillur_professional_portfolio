@@ -1,11 +1,17 @@
+
+
 "use client";
 
 import { motion } from "framer-motion";
+
 import {
   FaReact,
   FaNodeJs,
   FaGitAlt,
   FaGithub,
+  FaJava,
+  FaRobot,
+  FaCode,
 } from "react-icons/fa";
 
 import {
@@ -15,10 +21,16 @@ import {
   SiRedux,
   SiTailwindcss,
   SiJavascript,
+  SiKotlin,
+  SiSwift,
 } from "react-icons/si";
 
 
+
 const techs = [
+
+  // Existing
+
   {
     icon:<FaReact />,
     color:"#61dafb",
@@ -65,8 +77,63 @@ const techs = [
     icon:<SiJavascript />,
     color:"#F7DF1E",
     position:"bottom-5 left-1/3"
+  },
+
+
+  // Added Technologies
+
+
+  {
+    icon:<FaJava />,
+    color:"#f89820",
+    position:"top-32 left-1/3"
+  },
+
+
+  {
+    icon:<SiKotlin />,
+    color:"#7F52FF",
+    position:"bottom-32 right-1/3"
+  },
+
+
+  {
+    icon:<SiSwift />,
+    color:"#FA7343",
+    position:"top-1/3 right-5"
+  },
+
+
+  {
+    icon:<FaGitAlt />,
+    color:"#F1502F",
+    position:"bottom-5 right-1/2"
+  },
+
+
+  {
+    icon:<FaGithub />,
+    color:"#ffffff",
+    position:"top-1/2 right-1/4"
+  },
+
+
+  {
+    icon:<FaRobot />,
+    color:"#22c55e",
+    position:"top-5 left-1/2"
+  },
+
+
+  {
+    icon:<FaCode />,
+    color:"#38bdf8",
+    position:"bottom-1/4 left-1/4"
   }
+
+
 ];
+
 
 
 

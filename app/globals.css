@@ -20,3 +20,7 @@ body {
 canvas{
 position:absolute !important;
 }
+
+.mb-safe {
+  margin-bottom: env(safe-area-inset-bottom);
+}
